@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="loginString">Login</string>
+    <string name="app_name">Elgg App</string>
+    <string name="unameHint">User Name</string>
+    <string name="pwdHint">Password</string>
+
+</resources>
