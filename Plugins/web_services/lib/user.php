@@ -34,26 +34,50 @@ expose_function('user.get_profile_fields',
  *
  * @param string $username username to get profile information
  *
- * @return string $user_fields Array of profile information with labels as the keys
+ * @return string $profile_info Array containin 'core', 'profile_fields' and 'avatar_url'
  */
 function user_get_profile($username) {
-	$user = get_user_by_username($username);
+	//if $username is not provided then try and get the loggedin user
+	if(!$username){
+		$user = get_loggedin_user();
+	} else {
+		$user = get_user_by_username($username);
+	}
+	
 	if (!$user) {
 		throw new InvalidParameterException('registration:usernamenotvalid');
 	}
 	
 	$user_fields = elgg_get_config('profile_fields');
+	
 	foreach ($user_fields as $key => $type) {
-		$user_fields[$key] = $user->$key;
+		if($user->$key){
+			$profile_fields[$key]['label'] = elgg_echo('profile:'.$key);
+			$profile_fields[$key]['type'] = $type;
+			if(is_array($user->$key)){
+			$profile_fields[$key]['value'] = $user->$key;
+
+			} else {
+			$profile_fields[$key]['value'] = strip_tags($user->$key);
+			}
+		}
 	}
-	return $user_fields;
+	
+	
+	$core['name'] = $user->name;
+	$core['username'] = $user->username;
+	
+	$profile_info['core'] = $core;
+	$profile_info['profile_fields'] = $profile_fields;
+	$profile_info['avatar_url'] = get_entity_icon_url($user,'medium');
+	return $profile_info;
 }
 
 expose_function('user.get_profile',
 				"user_get_profile",
-				array('username' => array ('type' => 'string')
+				array('username' => array ('type' => 'string', 'required' => false)
 					),
-				"Get user profile labels",
+				"Get user profile information",
 				'GET',
 				false,
 				false);
@@ -65,7 +89,11 @@ expose_function('user.get_profile',
  * @return bool 
  */
 function user_save_profile($username, $profile) {
-	$user = get_user_by_username($username);
+	if(!$username){
+		$user = get_loggedin_user();
+	} else {
+		$user = get_user_by_username($username);
+	}
 	if (!$user) {
 		throw new InvalidParameterException('registration:usernamenotvalid');
 	}
@@ -106,12 +134,14 @@ function user_save_profile($username, $profile) {
 				'metadata_name' => $shortname
 			);
 			elgg_delete_metadata($options);
+			
 			if (isset($accesslevel[$shortname])) {
 				$access_id = (int) $accesslevel[$shortname];
 			} else {
 				// this should never be executed since the access level should always be set
 				$access_id = ACCESS_DEFAULT;
 			}
+			
 			if (is_array($value)) {
 				$i = 0;
 				foreach ($value as $interval) {
@@ -119,11 +149,14 @@ function user_save_profile($username, $profile) {
 					$multiple = ($i > 1) ? TRUE : FALSE;
 					create_metadata($owner->guid, $shortname, $interval, 'text', $owner->guid, $access_id, $multiple);
 				}
+				
 			} else {
 				create_metadata($owner->guid, $shortname, $value, 'text', $owner->guid, $access_id);
 			}
 		}
+		
 	}
+	
 	return "Success";
 }
 	
@@ -236,7 +269,11 @@ expose_function('user.register',
  * @return bool
  */           
 function user_friend_add($username, $friend) {
-	$user = get_user_by_username($username);
+	if(!$username){
+		$user = get_loggedin_user();
+	} else {
+		$user = get_user_by_username($username);
+	}
 	$return['success'] = false;
 	if (!$user) {
 		$return['message'] = elgg_echo('registration:usernamenotvalid');
@@ -289,8 +326,12 @@ expose_function('user.friend.add',
  *
  * @return bool
  */           
-function user_friend_remove($username, $friend) {
-	$user = get_user_by_username($username);
+function user_friend_remove($friend,$username) {
+	if(!$username){
+		$user = get_loggedin_user();
+	} else {
+		$user = get_user_by_username($username);
+	}
 	$return['success'] = false;
 	if (!$user) {
 		$return['message'] = elgg_echo('registration:usernamenotvalid');
@@ -323,13 +364,14 @@ function user_friend_remove($username, $friend) {
 
 expose_function('user.friend.remove',
 				"user_friend_remove",
-				array('username' => array ('type' => 'string'),
+				array(
 						'friend' => array ('type' => 'string'),
+						'username' => array ('type' => 'string', 'required' => false),
 					),
 				"Remove friend",
-				'POST',
+				'GET',
 				true,
-				false);				
+				true);				
 				
 /**
  * Web service to get friends of a user
@@ -341,7 +383,11 @@ expose_function('user.friend.remove',
  * @return array
  */           
 function user_get_friends($username, $limit = 10, $offset = 0) {
-	$user = get_user_by_username($username);
+	if($username){
+		$user = get_user_by_username($username);
+	} else {
+		$user = get_loggedin_user();
+	}
 	if (!$user) {
 		throw new InvalidParameterException(elgg_echo('registration:usernamenotvalid'));
 	}
@@ -351,6 +397,7 @@ function user_get_friends($username, $limit = 10, $offset = 0) {
 	foreach($friends as $friend) {
 		$return[$friend->guid]['username'] = $friend->username;
 		$return[$friend->guid]['name'] = $friend->name;
+		$return[$friend->guid]['avatar_url'] = get_entity_icon_url($friend,'small');
 		$success = true;
 	}
 	
@@ -362,7 +409,7 @@ function user_get_friends($username, $limit = 10, $offset = 0) {
 
 expose_function('user.friend.get_friends',
 				"user_get_friends",
-				array('username' => array ('type' => 'string', 'required' => true),
+				array('username' => array ('type' => 'string', 'required' => false),
 						'limit' => array ('type' => 'int', 'required' => false),
 						'offset' => array ('type' => 'int', 'required' => false),
 					),
@@ -381,7 +428,11 @@ expose_function('user.friend.get_friends',
  * @return array
  */           
 function user_get_friends_of($username, $limit = 10, $offset = 0) {
-	$user = get_user_by_username($username);
+	if(!$username){
+		$user = get_loggedin_user();
+	} else {
+		$user = get_user_by_username($username);
+	}
 	if (!$user) {
 		throw new InvalidParameterException(elgg_echo('registration:usernamenotvalid'));
 	}
@@ -410,4 +461,39 @@ expose_function('user.friend.get_friends_of',
 				'GET',
 				false,
 				false);	
-
+				
+/**
+ * Web service to retrieve list of groups a user is member of
+ *
+ * @param string $username Username
+ * @param string $limit    Number of users to return
+ * @param string $offset   Indexing offset, if any
+ *
+ * @return array
+ */    				
+function user_get_groups($username, $limit, $offset){
+	if(!$username){
+		$user = get_loggedin_user();
+	} else {
+		$user = get_user_by_username($username);
+	}
+	
+	$groups = $user->getGroups();
+	foreach($groups as $group){
+		$return[$group->guid]['guid'] = $group->guid;
+		$return[$group->guid]['name'] = $group->name;
+		$return[$group->guid]['members'] = count($group->getMembers($limit=0));
+		$return[$group->guid]['avatar_url'] = get_entity_icon_url($group,'small');
+	}
+	return $return;
+}
+expose_function('user.get_groups',
+				"user_get_groups",
+				array('username' => array ('type' => 'string', 'required' => false),
+						'limit' => array ('type' => 'int', 'required' => false),
+						'offset' => array ('type' => 'int', 'required' => false),
+					),
+				"Get groups use is a member of",
+				'GET',
+				false,
+				false);	

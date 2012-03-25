@@ -3,12 +3,12 @@
  * Elgg Webservice plugin 
  * 
  * @package Webservice
- * @author Saket Saurabh
+ * @author Saket Saurabh/Mark Harding
  *
  */
 function web_services_init() {
 	$action_base = elgg_get_plugins_path() . 'web_services/actions';
-	elgg_register_action('settings/web_services/save', "$action_base/save.php", "admin");
+	elgg_register_action('web_services/settings/save', "$action_base/save.php", "admin");
 	elgg_register_action('web_services/run_tests', "$action_base/web_services/run_tests.php", "admin");
 
 	elgg_register_admin_menu_item('develop', 'web_services', 'utilities');
@@ -24,6 +24,9 @@ foreach($enabled as $service) {
 	elgg_register_library('webservice:'.$service, elgg_get_plugins_path() . 'web_services/lib/'.$service.'.php');
 	elgg_load_library('webservice:'.$service);
 }
+//Core Library should be default
+elgg_register_library('webservice:core', elgg_get_plugins_path() . 'web_services/lib/core.php');
+elgg_load_library('webservice:core');
 
 /**
  * Unit test registration for web services
@@ -52,6 +55,7 @@ function web_services_test($hook, $type, $value, $params) {
 	$value[] = elgg_get_plugins_path() . 'web_services/tests/wire.php';
 	$value[] = elgg_get_plugins_path() . 'web_services/tests/file.php';
 	$value[] = elgg_get_plugins_path() . 'web_services/tests/core.php';
+	$value[] = elgg_get_plugins_path() . 'web_services/tests/messages.php';
 	return $value;
 }
 
