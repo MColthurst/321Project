@@ -79,4 +79,17 @@ Below are a list of all the methods that can be called.
 ### File
 
  * file.get_files    Get file list by all users or a pecific user
- * file.get_files_by_friend Get file list by friends
+ * file.get_files_by_friend Get file list by friends### Authentication
+
+Web sevices make use of Elgg's API authentication web service for authetication.
+
+A sample code for authentication will look like this
+
+	```
+	$params = array(
+		'username' => $username,
+		'password' => $password,
+	);
+	$token = $this->post('auth.gettoken', $params);
+	```
+This token will be used for all web services call in the future. This token must be passed in every call as 'auth_token'.
