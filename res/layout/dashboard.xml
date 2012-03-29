@@ -2,13 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <Button
+
+    <ImageButton
         android:id="@+id/D_loginbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/loginString" />
+        android:src="@drawable/ic_login" />
 
+    <ImageButton
+        android:id="@+id/D_profilebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/D_loginbtn"
+        android:src="@drawable/ic_profile" />
+
+    <ImageButton
+        android:id="@+id/D_wirebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/D_profilebtn"
+        android:src="@drawable/ic_wire" />
+    
+    <ImageButton
+        android:id="@+id/D_friendsbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/D_wirebtn"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_friends" />
 </RelativeLayout>
