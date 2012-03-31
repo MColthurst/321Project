@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/D_loginbtn"
         android:src="@drawable/ic_profile" />
 
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/D_profilebtn"
         android:src="@drawable/ic_wire" />
     
@@ -32,7 +32,7 @@
         android:id="@+id/D_friendsbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/D_wirebtn"
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_friends" />

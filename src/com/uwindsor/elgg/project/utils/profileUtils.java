@@ -22,6 +22,10 @@ public class profileUtils {
 	static JSONObject JSON = new JSONObject();
 	static String name;
 	static String uname;
+	static String about;
+	static String city;
+	static String email;
+	static String avatarURL;
 
 	public static void getProfile(Context context, String auth_token) {
 		
@@ -42,6 +46,20 @@ public class profileUtils {
 						JSONObject core = result.getJSONObject("core");
 						uname = core.getString("username");
 						name = core.getString("name");
+						
+						JSONObject profile_fields = result.getJSONObject("profile_fields");
+						
+						JSONObject description = profile_fields.getJSONObject("description");
+						about = description.getString("value");
+						
+						JSONObject location = profile_fields.getJSONObject("location");
+						city = location.getString("value");
+						
+						JSONObject contactemail = profile_fields.getJSONObject("contactemail");
+						email = contactemail.getString("value");
+						
+						avatarURL = result.getString("avatar_url");
+						
 					}
 					else 
 						name = "-1";
@@ -53,6 +71,10 @@ public class profileUtils {
 				Intent i = new Intent(that, ProfileActivity.class);
 				i.putExtra("name", name);
 				i.putExtra("uname", uname);
+				i.putExtra("about", about);
+				i.putExtra("city", city);
+				i.putExtra("email", email);
+				i.putExtra("avatarURL", avatarURL);
 				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				that.startActivity(i);
 			}

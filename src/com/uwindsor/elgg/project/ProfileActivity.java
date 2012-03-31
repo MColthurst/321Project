@@ -9,6 +9,9 @@ public class ProfileActivity extends Activity{
 	ImageView picture;
 	TextView uname;
 	TextView name;
+	TextView about;
+	TextView city;
+	TextView email;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,15 @@ public class ProfileActivity extends Activity{
 		
 		name = (TextView) findViewById(R.id.P_name);
 		name.setText("Name: " + getIntent().getCharSequenceExtra("name"));
+		
+		about = (TextView) findViewById(R.id.P_about);
+		about.setText("About Me: " + getIntent().getCharSequenceExtra("about"));
+		
+		city = (TextView) findViewById(R.id.P_location);
+		city.setText("Location: " + getIntent().getCharSequenceExtra("city"));
+		
+		email = (TextView) findViewById(R.id.P_email);
+		email.setText("EMail: " + getIntent().getCharSequenceExtra("email"));
 		
 	}
 }
