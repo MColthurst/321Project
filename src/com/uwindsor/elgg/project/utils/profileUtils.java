@@ -16,7 +16,7 @@ import com.uwindsor.elgg.project.http.AsyncHttpResponseHandler;
 
 public class profileUtils {
 	
-	private static final String baseURL = "http://192.168.2.20/services/api/rest/json/?method=user.get_profile&api_key=6b189b42c41c3c31cc93f7bb697d8ab99626d532&auth_token=";
+	private static final String baseURL = "http://192.168.56.101/services/api/rest/json/?method=user.get_profile&api_key=6b189b42c41c3c31cc93f7bb697d8ab99626d532&auth_token=";
 	private static AsyncHttpClient client = new AsyncHttpClient();
 	
 	static JSONObject JSON = new JSONObject();

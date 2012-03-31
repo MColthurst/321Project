@@ -51,6 +51,5 @@ public class MainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == LOGIN_CODE && resultCode == RESULT_OK)
 			this.getIntent().putExtra("auth_token", data.getStringExtra("auth_token"));
-		this.recreate();
 	};
 }
