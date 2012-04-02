@@ -29,14 +29,11 @@ public final class R {
         public static final int P_name=0x7f050009;
         public static final int P_picture=0x7f050008;
         public static final int P_uname=0x7f050007;
-        public static final int W_button=0x7f050010;
-        public static final int W_friendsPosts=0x7f050012;
-        public static final int W_myPosts=0x7f05000e;
-        public static final int W_post=0x7f05000f;
+        public static final int W_button=0x7f05000f;
+        public static final int W_myPosts=0x7f05000d;
+        public static final int W_post=0x7f05000e;
         public static final int loginBtn=0x7f050006;
         public static final int passWD=0x7f050005;
-        public static final int tab1=0x7f05000d;
-        public static final int tab2=0x7f050011;
         public static final int uName=0x7f050004;
     }
     public static final class layout {
