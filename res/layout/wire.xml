@@ -7,7 +7,7 @@
                         android:id="@+id/W_myPosts"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" 
-                        android:layout_above="@id/W_post">
+                        android:layout_above="@+id/W_post">
 
                     </ListView>
 

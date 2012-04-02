@@ -1,5 +1,6 @@
 package com.uwindsor.elgg.project;
 
+import com.uwindsor.elgg.project.utils.WireUtils;
 import com.uwindsor.elgg.project.utils.profileUtils;
 
 import android.app.Activity;
@@ -29,6 +30,9 @@ public class MainActivity extends Activity {
         
         profile = (ImageButton) findViewById(R.id.D_profilebtn);
         profile.setOnClickListener(prflListener);
+        
+        wire = (ImageButton) findViewById(R.id.D_wirebtn);
+        wire.setOnClickListener(wireListener);
     }
     
     
@@ -48,8 +52,18 @@ public class MainActivity extends Activity {
     		}
 	};
 	
+	private OnClickListener wireListener = new OnClickListener() {
+    	public void onClick(View v) {
+    			if(getIntent().hasExtra("uname"))
+    				WireUtils.getPosts(getApplicationContext(), getIntent().getStringExtra("uname"));
+    			else
+    				Toast.makeText(getApplicationContext(), "Not Logged In", Toast.LENGTH_LONG);
+    		}
+	};
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == LOGIN_CODE && resultCode == RESULT_OK)
+			this.getIntent().putExtra("uname", data.getStringExtra("uname"));
+			this.getIntent().putExtra("pwd", data.getStringExtra("pwd"));
 			this.getIntent().putExtra("auth_token", data.getStringExtra("auth_token"));
 	};
 }

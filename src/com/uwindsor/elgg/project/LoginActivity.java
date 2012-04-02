@@ -71,6 +71,8 @@ public class LoginActivity extends Activity{
         					if(JSON.getInt("status") == 0){
         						authToken = JSON.getString("result");
                 				Intent i = new Intent();
+                				i.putExtra("uname", uname.getText().toString());
+                				i.putExtra("pwd", pwd.getText().toString());
                 				i.putExtra("auth_token", authToken);
                 				setResult(RESULT_OK, i);
         					}
