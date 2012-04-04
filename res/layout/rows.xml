@@ -12,32 +12,30 @@
 	    android:layout_marginTop="5dip"
 	    android:lines="1"
 	    android:text="Name"
-	    android:textAppearance="?android:attr/textAppearanceLarge"
-	    android:textColor="#505050"
-	    android:textSize="30dip" >
+	    android:textAppearance="?android:attr/textAppearanceMedium"
+	    android:textColor="#999999">
 
-</TextView>
-
+	</TextView>
+
 	<TextView
 	    android:id="@+id/R_post_time"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignParentRight="true"
+	    android:layout_alignLeft="@+id/R_post_name"
+	    android:layout_below="@+id/R_post_name"
 	    android:text="time"
 	    android:textAppearance="?android:attr/textAppearanceLarge"
 	    android:textColor="#505050"
-	    android:textSize="16dip" >
+	    android:textSize="14dip" />
 
-</TextView>
-
 	<TextView
 	    android:id="@+id/R_post_comment"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/R_post_name"
-	    android:layout_below="@+id/R_post_name"
+	    android:layout_alignLeft="@+id/R_post_time"
+	    android:layout_below="@+id/R_post_time"
 	    android:text="comment"
-	    android:textColor="#505050"
-	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	    android:textAppearance="?android:attr/textAppearanceMedium"
+	    android:textColor="#FFFFFF" />
 
 </RelativeLayout>

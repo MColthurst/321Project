@@ -20,10 +20,12 @@ public class WireUtils {
 	
 	static JSONObject JSON = new JSONObject();
 	static String json;
+	private static String name;
 	
 	public static void getPosts(Context context, String uname) {
 		
 		final Context that = (Context) context;
+		name = uname;
 		String url = baseURL.concat(uname);
 		Log.d("URL ", url);
 		
@@ -47,6 +49,7 @@ public class WireUtils {
 				
 				Intent i = new Intent(that, WireActivity.class);
 				i.putExtra("json", json);
+				i.putExtra("uname", name);
 				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				that.startActivity(i);
 			}

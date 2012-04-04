@@ -50,7 +50,7 @@ public class WireActivity extends Activity {
 			e.printStackTrace();
 		}
 		
-		Adapter a = new SimpleAdapter(this, result);
+		Adapter a = new SimpleAdapter(this, result, getIntent().getStringExtra("uname"));
 		ListView list = (ListView) findViewById(R.id.W_myPosts);
 		list.setAdapter((ListAdapter) a);
 	}
