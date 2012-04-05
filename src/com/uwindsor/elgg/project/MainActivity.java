@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 	private OnClickListener wireListener = new OnClickListener() {
     	public void onClick(View v) {
     			if(getIntent().hasExtra("uname"))
-    				WireUtils.getPosts(getApplicationContext(), getIntent().getStringExtra("uname"));
+    				WireUtils.getPosts(getApplicationContext(), getIntent().getStringExtra("uname"), getIntent().getStringExtra("auth_token"), null);
     			else
     				Toast.makeText(getApplicationContext(), "Not Logged In", Toast.LENGTH_LONG);
     		}
