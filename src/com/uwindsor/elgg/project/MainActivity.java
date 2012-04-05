@@ -1,5 +1,6 @@
 package com.uwindsor.elgg.project;
 
+import com.uwindsor.elgg.project.utils.FriendsUtils;
 import com.uwindsor.elgg.project.utils.WireUtils;
 import com.uwindsor.elgg.project.utils.profileUtils;
 
@@ -33,6 +34,9 @@ public class MainActivity extends Activity {
         
         wire = (ImageButton) findViewById(R.id.D_wirebtn);
         wire.setOnClickListener(wireListener);
+        
+        friends = (ImageButton) findViewById(R.id.D_friendsbtn);
+        friends.setOnClickListener(frndsListener);
     }
     
     
@@ -60,6 +64,16 @@ public class MainActivity extends Activity {
     				Toast.makeText(getApplicationContext(), "Not Logged In", Toast.LENGTH_LONG);
     		}
 	};
+	
+	private OnClickListener frndsListener = new OnClickListener() {
+    	public void onClick(View v) {
+    		if(getIntent().hasExtra("uname"))
+    			FriendsUtils.getFriends(getApplicationContext(), getIntent().getStringExtra("uname"));
+			else
+				Toast.makeText(getApplicationContext(), "Not Logged In", Toast.LENGTH_LONG);
+    	}
+	};	
+	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == LOGIN_CODE && resultCode == RESULT_OK)
 			this.getIntent().putExtra("uname", data.getStringExtra("uname"));

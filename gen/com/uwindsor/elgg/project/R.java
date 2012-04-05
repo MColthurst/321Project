@@ -16,36 +16,52 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
         public static final int ic_login=0x7f020003;
         public static final int ic_profile=0x7f020004;
-        public static final int ic_wire=0x7f020005;
+        public static final int ic_remove=0x7f020005;
+        public static final int ic_wire=0x7f020006;
     }
     public static final class id {
         public static final int D_friendsbtn=0x7f050003;
         public static final int D_loginbtn=0x7f050000;
         public static final int D_profilebtn=0x7f050001;
         public static final int D_wirebtn=0x7f050002;
-        public static final int P_about=0x7f05000c;
-        public static final int P_email=0x7f05000b;
-        public static final int P_location=0x7f05000a;
-        public static final int P_name=0x7f050009;
-        public static final int P_picture=0x7f050008;
-        public static final int P_uname=0x7f050007;
-        public static final int R_post_comment=0x7f050010;
-        public static final int R_post_name=0x7f05000e;
-        public static final int R_post_time=0x7f05000f;
-        public static final int W_button=0x7f050013;
-        public static final int W_myPosts=0x7f050011;
-        public static final int W_post=0x7f050012;
-        public static final int loginBtn=0x7f050006;
-        public static final int mainLayout=0x7f05000d;
-        public static final int passWD=0x7f050005;
-        public static final int uName=0x7f050004;
+        public static final int FP_about=0x7f05000e;
+        public static final int FP_email=0x7f05000d;
+        public static final int FP_location=0x7f05000c;
+        public static final int FP_name=0x7f05000b;
+        public static final int FP_picture=0x7f05000a;
+        public static final int FP_removebtn=0x7f05000f;
+        public static final int FP_uname=0x7f050009;
+        public static final int FP_wirebtn=0x7f050010;
+        public static final int FR_name=0x7f050007;
+        public static final int FR_picture=0x7f050005;
+        public static final int FR_uname=0x7f050006;
+        public static final int F_list=0x7f050008;
+        public static final int P_about=0x7f050019;
+        public static final int P_email=0x7f050018;
+        public static final int P_location=0x7f050017;
+        public static final int P_name=0x7f050016;
+        public static final int P_picture=0x7f050015;
+        public static final int P_uname=0x7f050014;
+        public static final int R_post_comment=0x7f05001c;
+        public static final int R_post_name=0x7f05001a;
+        public static final int R_post_time=0x7f05001b;
+        public static final int W_button=0x7f05001f;
+        public static final int W_myPosts=0x7f05001d;
+        public static final int W_post=0x7f05001e;
+        public static final int loginBtn=0x7f050013;
+        public static final int mainLayout=0x7f050004;
+        public static final int passWD=0x7f050012;
+        public static final int uName=0x7f050011;
     }
     public static final class layout {
         public static final int dashboard=0x7f030000;
-        public static final int login=0x7f030001;
-        public static final int profile=0x7f030002;
-        public static final int rows=0x7f030003;
-        public static final int wire=0x7f030004;
+        public static final int friendrows=0x7f030001;
+        public static final int friends=0x7f030002;
+        public static final int friendsprofile=0x7f030003;
+        public static final int login=0x7f030004;
+        public static final int profile=0x7f030005;
+        public static final int rows=0x7f030006;
+        public static final int wire=0x7f030007;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

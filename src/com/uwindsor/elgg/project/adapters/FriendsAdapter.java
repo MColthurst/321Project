@@ -14,21 +14,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uwindsor.elgg.project.R;
 
-public class SimpleAdapter extends BaseAdapter {
+public class FriendsAdapter extends BaseAdapter {
 
 	private Activity activity;
 	private List<JSONObject> data;
-	private String uname;
 	private static LayoutInflater inflater = null;
+	private Context that;
 
-	public SimpleAdapter(Activity a, List<JSONObject> d, String u) {
+	public FriendsAdapter(Activity a, List<JSONObject> d, Context context) {
 		activity = a;
 		data = d;
-		uname = u;
+		that = (Context) context;
 		inflater = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -48,22 +49,19 @@ public class SimpleAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
 		if (convertView == null)
-			vi = inflater.inflate(R.layout.rows, null);
+			vi = inflater.inflate(R.layout.friendrows, null);
 
 		try {
-			TextView text = (TextView) vi.findViewById(R.id.R_post_name);
-			text.setText("Posted By: " + uname);
+			TextView text = (TextView) vi.findViewById(R.id.FR_uname);
+			text.setText(data.get(position).getString("username"));
 			
-			text = (TextView) vi.findViewById(R.id.R_post_comment);
-			text.setText(data.get(position).getString("description"));
+			text = (TextView) vi.findViewById(R.id.FR_name);
+			text.setText(data.get(position).getString("name"));
 			
-			text = (TextView) vi.findViewById(R.id.R_post_time);
-			
-			Date date = new Date ();
-			Long unix_time = Long.parseLong(data.get(position).getString("time_created"));
-			date.setTime((long)unix_time*1000);
-			
-			text.setText("@" + date.toString());
+			ImageView picture = (ImageView) vi.findViewById(R.id.FR_picture);
+			ImageLoader imageLoader = new ImageLoader(that);
+			imageLoader.DisplayImage(data.get(position).getString("avatar_url"), activity, picture);
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
