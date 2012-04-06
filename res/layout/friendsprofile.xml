@@ -61,19 +61,12 @@
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ImageButton
-        android:id="@+id/FP_removebtn"
+        android:id="@+id/FP_wirebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/FP_about"
-        android:src="@drawable/ic_remove" />
-
-    <ImageButton
-        android:id="@+id/FP_wirebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/FP_removebtn"
-        android:layout_toRightOf="@+id/FP_removebtn"
+        android:layout_marginTop="14dp"
         android:src="@drawable/ic_wire" />
 
 </RelativeLayout>

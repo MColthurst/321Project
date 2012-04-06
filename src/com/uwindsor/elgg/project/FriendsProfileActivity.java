@@ -1,9 +1,12 @@
 package com.uwindsor.elgg.project;
 
 import com.uwindsor.elgg.project.adapters.ImageLoader;
+import com.uwindsor.elgg.project.utils.WireUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,7 +19,6 @@ public class FriendsProfileActivity extends Activity{
 	TextView about;
 	TextView city;
 	TextView email;
-	ImageButton remove;
 	ImageButton wire;
 	
 	public ImageLoader imageLoader;
@@ -48,5 +50,14 @@ public class FriendsProfileActivity extends Activity{
 		imageLoader = new ImageLoader(this.getApplicationContext());
 		imageLoader.DisplayImage(getIntent().getStringExtra("avatarURL"), a, picture);
 		
+		wire = (ImageButton) findViewById(R.id.FP_wirebtn);
+		wire.setOnClickListener(wListener);
+		
 	}
+	
+	private OnClickListener wListener = new OnClickListener() {
+    	public void onClick(View v) {
+    			WireUtils.getPosts(getApplicationContext(), getIntent().getCharSequenceExtra("uname").toString(), null, null);
+    		}
+	};
 }

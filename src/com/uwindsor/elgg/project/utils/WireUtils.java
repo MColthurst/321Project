@@ -2,6 +2,7 @@ package com.uwindsor.elgg.project.utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.uwindsor.elgg.project.FriendWireActivity;
 import com.uwindsor.elgg.project.WireActivity;
 import com.uwindsor.elgg.project.http.AsyncHttpClient;
 import com.uwindsor.elgg.project.http.AsyncHttpResponseHandler;
@@ -21,7 +23,7 @@ public class WireUtils {
 	private static final String postURL = "http://192.168.56.101/services/api/rest/json/?method=wire.save_post&api_key=6b189b42c41c3c31cc93f7bb697d8ab99626d532&auth_token=";
 	private static AsyncHttpClient client = new AsyncHttpClient();
 	
-	static JSONObject JSON = new JSONObject();
+	static JSONObject JSON;
 	static String json;
 	private static String name;
 	
@@ -38,7 +40,9 @@ public class WireUtils {
 			public void onSuccess (String response) {
 				Log.d("json response", response);
 				try {
-					JSON = new JSONObject(response);
+					JSONTokener jt = new JSONTokener(response);
+					Log.d("Tokener", jt.toString());
+					JSON = new JSONObject(jt);
 					Log.d("JSON.toString", JSON.toString());
 					if(JSON.getInt("status") == 0){
 						json = JSON.toString();
@@ -49,15 +53,25 @@ public class WireUtils {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				Intent i = new Intent(that, WireActivity.class);
-				i.putExtra("json", json);
-				i.putExtra("uname", name);
-				i.putExtra("auth_token", auth_token);
-				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				that.startActivity(i);
-				if(a!=null)
-					a.finish();
+				if(auth_token!=null){
+					Intent i = new Intent(that, WireActivity.class);
+					i.putExtra("json", json);
+					i.putExtra("uname", name);
+					i.putExtra("auth_token", auth_token);
+					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					that.startActivity(i);
+					if(a!=null)
+						a.finish();
+				}
+				else{
+					Intent i = new Intent(that, FriendWireActivity.class);
+					i.putExtra("json", json);
+					i.putExtra("uname", name);
+					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					that.startActivity(i);
+				}
+					
+					
 			}
 	
 			@Override

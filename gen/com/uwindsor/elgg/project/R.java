@@ -29,12 +29,12 @@ public final class R {
         public static final int FP_location=0x7f05000c;
         public static final int FP_name=0x7f05000b;
         public static final int FP_picture=0x7f05000a;
-        public static final int FP_removebtn=0x7f05000f;
         public static final int FP_uname=0x7f050009;
-        public static final int FP_wirebtn=0x7f050010;
+        public static final int FP_wirebtn=0x7f05000f;
         public static final int FR_name=0x7f050007;
         public static final int FR_picture=0x7f050005;
         public static final int FR_uname=0x7f050006;
+        public static final int FW_Posts=0x7f050010;
         public static final int F_list=0x7f050008;
         public static final int P_about=0x7f050019;
         public static final int P_email=0x7f050018;
@@ -58,10 +58,11 @@ public final class R {
         public static final int friendrows=0x7f030001;
         public static final int friends=0x7f030002;
         public static final int friendsprofile=0x7f030003;
-        public static final int login=0x7f030004;
-        public static final int profile=0x7f030005;
-        public static final int rows=0x7f030006;
-        public static final int wire=0x7f030007;
+        public static final int friendswire=0x7f030004;
+        public static final int login=0x7f030005;
+        public static final int profile=0x7f030006;
+        public static final int rows=0x7f030007;
+        public static final int wire=0x7f030008;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

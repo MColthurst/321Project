@@ -28,11 +28,9 @@ import com.uwindsor.elgg.project.adapters.*;
 import com.uwindsor.elgg.project.utils.WireUtils;
 import com.uwindsor.elgg.project.utils.profileUtils;
 
-public class WireActivity extends Activity {
+public class FriendWireActivity extends Activity {
 	Activity a = new Activity();
 	
-	Button submit;
-	EditText post;
 	ListView list;
 	
 	private String uname;
@@ -41,13 +39,11 @@ public class WireActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.wire);
+		setContentView(R.layout.friendswire);
 		
 		a = this;
 		uname = getIntent().getStringExtra("uname");
-				
-		submit = (Button) findViewById(R.id.W_button);
-		post = (EditText) findViewById(R.id.W_post);
+			
 		
 		List<JSONObject> result = new ArrayList<JSONObject>();
 		
@@ -94,15 +90,9 @@ public class WireActivity extends Activity {
 		}
 		
 		Adapter a = new SimpleAdapter(this, result, uname);
-		ListView list = (ListView) findViewById(R.id.W_myPosts);
+		ListView list = (ListView) findViewById(R.id.FW_Posts);
 		list.setAdapter((ListAdapter) a);
 		
-		submit.setOnClickListener(sListener);	
 	}
 	
-	private OnClickListener sListener = new OnClickListener() {
-    	public void onClick(View v) {
-    			WireUtils.makePost(a, getApplicationContext(), uname, post.getText().toString(), getIntent().getStringExtra("auth_token"));
-    		}
-	};
 }

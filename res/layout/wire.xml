@@ -10,14 +10,14 @@
                         android:layout_above="@+id/W_post">
 
                     </ListView>
-
+
                     <EditText
                         android:id="@+id/W_post"
                         android:layout_width="200dp"
                         android:layout_height="100dp"
                         android:layout_alignParentBottom="true"
-                        
-						android:hint="140 Characters"/>
+                        android:hint="140 Characters"
+                        android:maxLength="140" />
 
                     <Button
                         android:id="@+id/W_button"
